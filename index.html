@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#10071e">
+    <meta name="referrer" content="no-referrer">
+    <title>Happy Diwali | A Special Celebration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Fireworks layer -->
+    <canvas id="fireworks"></canvas>
+
+    <!-- Floating decorations -->
+    <div id="balloons"></div>
+    <div id="stars"></div>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <a href="#home" class="brand">WISHORA<span>.</span></a>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#create" id="createNavLink">Create &amp; Send</a>
+            <a href="#wishes">My Wishes</a>
+            <a href="#celebrate">Celebrate</a>
+            <a href="#final">Surprise</a>
+        </nav>
+    </header>
+
+    <!-- SENDER STUDIO -->
+    <section class="sender-section" id="create">
+        <div class="sender-card">
+            <p class="small-heading">YOUR DIWALI, YOUR WORDS</p>
+            <h2>Create a greeting to send</h2>
+            <p class="sender-intro">Personalize this celebration and send your recipient a link to their own Diwali page.</p>
+
+            <form id="senderForm" class="sender-form">
+                <label for="senderRecipient">Who are you celebrating?</label>
+                <input id="senderRecipient" name="recipient" type="text"
+                       maxlength="60" placeholder="Recipient's name" required>
+
+                <label for="senderName">Your name</label>
+                <input id="senderName" name="sender" type="text"
+                       maxlength="60" placeholder="Your name" required>
+
+                <label for="senderMessage">Add a personal message <span>(optional)</span></label>
+                <textarea id="senderMessage" name="message" rows="3"
+                          maxlength="280" placeholder="Write a few warm words..."></textarea>
+                <div class="message-count"><span id="messageCount">0</span>/280</div>
+
+                <button class="gold-btn sender-submit" type="submit">
+                    ✨ Create My Greeting Link
+                </button>
+            </form>
+
+            <div class="greeting-file-share">
+                <p class="greeting-file-heading">Want to include their photo?</p>
+                <label for="senderPhoto">Recipient's photo <span>(optional)</span></label>
+                <input id="senderPhoto" type="file" accept="image/jpeg,image/png,image/webp">
+                <p class="greeting-file-help">This creates a greeting file with your message and photo. The recipient opens it on this page—no password needed. The photo is shared in the file, not in the greeting link.</p>
+                <button class="copy-btn greeting-file-button" id="createGreetingFileBtn" type="button">
+                    💌 Create &amp; Share Greeting File
+                </button>
+                <p class="share-status" id="greetingFileStatus" role="status" aria-live="polite"></p>
+            </div>
+
+            <div class="share-result" id="shareResult" hidden>
+                <p class="share-heading">Your personalized greeting is ready</p>
+                <p class="share-help">Send this link to your recipient. It opens this same Diwali page, personalized just for them.</p>
+                <label class="sr-only" for="greetingLink">Your greeting link</label>
+                <input id="greetingLink" type="url" readonly>
+                <div class="share-actions">
+                    <button class="gold-btn" id="shareWhatsAppBtn" type="button">Send with WhatsApp ↗</button>
+                    <button class="copy-btn" id="copyLinkBtn" type="button">Copy link</button>
+                </div>
+                <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating fireworks -->
+    <button class="floating-fireworks" id="fireworksBtn">
+        🎆 <span>Launch Fireworks</span>
+    </button>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+
+        <div class="hanging-lights">
+            <span>✨</span>
+            <span>🪔</span>
+            <span>✨</span>
+            <span>🪔</span>
+            <span>✨</span>
+        </div>
+
+        <div class="hero-content">
+
+            <p class="small-heading">
+                ✨ A FESTIVAL OF LOVE, LIGHT AND HAPPINESS ✨
+            </p>
+
+            <p class="welcome">A Special Celebration For</p>
+
+            <h1>
+                HAPPY<br>
+                <span>DIWALI</span>
+            </h1>
+
+            <h2 id="receiverName">Someone Special ❤️</h2>
+            <img id="receiverPhoto" class="receiver-photo" alt="A photo shared with your greeting" hidden>
+
+            <p class="hero-message">
+                May this beautiful festival fill your world
+                with endless happiness, beautiful memories
+                and countless reasons to smile.
+            </p>
+
+            <button class="gold-btn" onclick="scrollToSection('wishes')">
+                Open Your Celebration ↓
+            </button>
+
+            <button class="create-yours-btn" id="createYourOwnBtn" type="button" hidden>
+                Create a greeting of your own ✨
+            </button>
+
+            <div class="received-card-action">
+                <span>Received a greeting file?</span>
+                <input id="greetingFileInput" type="file" accept=".wishora,application/octet-stream" hidden>
+                <button class="copy-btn" id="openGreetingFileBtn" type="button">Open greeting file</button>
+            </div>
+
+            <p class="scroll-text">SCROLL DOWN TO EXPLORE THE MAGIC</p>
+
+        </div>
+
+        <div class="hero-diya left-diya">🪔</div>
+        <div class="hero-diya right-diya">🪔</div>
+
+        <div class="hero-bottom">
+            ✨ LIGHT • LOVE • PEACE • PROSPERITY ✨
+        </div>
+
+    </section>
+
+
+    <!-- LONG GREETING -->
+    <section class="greeting-section" id="wishes">
+
+        <div class="section-content">
+
+            <p class="small-heading">A MESSAGE FROM THE HEART</p>
+
+            <h2>
+                A Little Light<br>
+                Can Brighten a Thousand Lives.
+            </h2>
+
+            <div class="gold-line"></div>
+
+            <p class="greeting-text">
+                Dear <span class="name-placeholder">Someone Special</span>,
+            </p>
+
+            <p class="greeting-text personal-message" id="personalMessage" hidden></p>
+
+            <p class="greeting-text">
+                On this beautiful occasion of Diwali, I wish you
+                a life filled with happiness, peace, success and
+                unforgettable moments.
+            </p>
+
+            <p class="greeting-text">
+                May every diya you light remove darkness from your
+                life and bring new hope, positive energy and beautiful
+                opportunities.
+            </p>
+
+            <p class="greeting-text">
+                May your home always be filled with laughter,
+                your heart with love, and your days with countless
+                reasons to smile.
+            </p>
+
+            <p class="greeting-text">
+                Just like the colourful fireworks that brighten
+                the night sky, may your dreams shine brightly
+                and your hard work turn into wonderful achievements.
+            </p>
+
+            <p class="greeting-text">
+                Forget every worry for a moment. Enjoy the sweets,
+                the lights, the celebrations and the people who
+                make life special.
+            </p>
+
+            <p class="greeting-text highlight-text">
+                You deserve all the happiness this beautiful
+                world has to offer.
+            </p>
+
+            <p class="greeting-text">
+                Keep smiling, keep shining and never stop spreading
+                happiness wherever you go.
+            </p>
+
+            <div class="signature">
+                <span>With lots of love ❤️</span>
+                <small id="senderSignature"></small>
+                <h3>Happy Diwali!</h3>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DIWALI LIGHTS -->
+    <section class="lights-section">
+
+        <p class="small-heading">LET THERE BE LIGHT</p>
+
+        <h2>Light Up Your Happiness</h2>
+
+        <p class="section-description">
+            Every little light carries a beautiful wish.
+            Click the diyas and make this celebration brighter.
+        </p>
+
+        <div class="diya-container">
+
+            <div class="diya-item">
+                <div class="flame"></div>
+                <div class="diya-body"></div>
+                <p>Hope</p>
+            </div>
+
+            <div class="diya-item">
+                <div class="flame"></div>
+                <div class="diya-body"></div>
+                <p>Love</p>
+            </div>
+
+            <div class="diya-item">
+                <div class="flame"></div>
+                <div class="diya-body"></div>
+                <p>Peace</p>
+            </div>
+
+            <div class="diya-item">
+                <div class="flame"></div>
+                <div class="diya-body"></div>
+                <p>Success</p>
+            </div>
+
+            <div class="diya-item">
+                <div class="flame"></div>
+                <div class="diya-body"></div>
+                <p>Joy</p>
+            </div>
+
+        </div>
+
+        <button class="gold-btn" id="lightAll">
+            🪔 Light All Diyas
+        </button>
+
+        <p id="diyaMessage" class="diya-message">
+            Let your happiness shine!
+        </p>
+
+    </section>
+
+
+    <!-- BALLOON CELEBRATION -->
+    <section class="balloon-section">
+
+        <p class="small-heading">LET YOUR DREAMS FLY HIGH</p>
+
+        <h2>Happiness Is In The Air!</h2>
+
+        <p class="section-description">
+            May your dreams rise higher, your worries disappear
+            and your happiness never end.
+        </p>
+
+        <div class="balloon-display">
+            <span>🎈</span>
+            <span>🎈</span>
+            <span>🎈</span>
+            <span>🎈</span>
+            <span>🎈</span>
+            <span>🎈</span>
+            <span>🎈</span>
+        </div>
+
+        <button class="gold-btn" id="balloonBtn">
+            Release More Balloons 🎈
+        </button>
+
+    </section>
+
+
+    <!-- FIREWORKS -->
+    <section class="firework-section" id="celebrate">
+
+        <p class="small-heading">THE NIGHT IS STILL YOUNG</p>
+
+        <h2>Let's Light Up The Sky!</h2>
+
+        <p class="section-description">
+            A celebration without fireworks is incomplete.
+            Make this Diwali unforgettable!
+        </p>
+
+        <div class="firework-emoji">
+            🎆 ✨ 🎇
+        </div>
+
+        <button class="gold-btn big-btn" id="bigFireworks">
+            🎆 Start Grand Celebration
+        </button>
+
+        <p class="firework-message">
+            Tap the button and watch the magic happen!
+        </p>
+
+    </section>
+
+
+    <!-- FINAL MESSAGE -->
+    <section class="final-section" id="final">
+
+        <p class="small-heading">ONE LAST THING...</p>
+
+        <h2>
+            You Make<br>
+            The World Brighter!
+        </h2>
+
+        <p class="final-message">
+            May this Diwali bring new beginnings,
+            beautiful surprises, endless blessings
+            and memories that stay in your heart forever.
+        </p>
+
+        <h3 id="finalName">Happy Diwali ❤️</h3>
+        <small class="sender-credit" id="senderCredit"></small>
+
+        <button class="gold-btn" id="surpriseBtn">
+            Open Your Surprise ✨
+        </button>
+
+        <div id="surpriseMessage">
+            <h2>🎉 Happy Diwali! 🎉</h2>
+            <p>
+                Sending you a sky full of stars,
+                a heart full of love and a lifetime
+                of happiness!
+            </p>
+            <h3>Keep Shining! ❤️</h3>
+        </div>
+
+        <div class="final-decoration">
+            🪔 🌸 ✨ 🎇 🌸 🪔
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <h2>WISHORA<span>.</span></h2>
+        <p>Made with ❤️ to spread happiness.</p>
+        <p>May your Diwali always shine bright.</p>
+        <p class="copyright">© 2026 WISHORA</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
